@@ -6,19 +6,29 @@
   </head>
 
   <body>
-    <h1>File Metadata Microservice</h1>
-
-    <form
-      id="uploadForm"
-      action="/api/fileanalyse"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      <input type="file" name="upfile" />
-      <input type="submit" value="Upload" />
-    </form>
-
-    <div id="result"></div>
+    <div class="container">
+      <div class="title">
+        <h1>File Metadata Microservice</h1>
+      </div>
+      <div class="upload">
+        <form
+          id="uploadForm"
+          action="/api/fileanalyse"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div class="upload-btn-wrapper">
+            <button class="btn">Choose a file</button>
+            <input type="file" name="upfile" />
+          </div>
+          <input type="submit" class="btn" value="Upload" />
+        </form>
+      </div>
+      <div class="result">
+        <h3>Result:</h3>
+        <div id="result"></div>
+      </div>
+    </div>
 
     <script>
       const form = document.getElementById('uploadForm');
