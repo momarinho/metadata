@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>File Metadata Microservice</title>
+    <link rel="stylesheet" href="/public/style.css" />
+  </head>
+
+  <body>
+    <h1>File Metadata Microservice</h1>
+
+    <form
+      id="uploadForm"
+      action="/api/fileanalyse"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <input type="file" name="upfile" />
+      <input type="submit" value="Upload" />
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+      const form = document.getElementById('uploadForm');
+      const resultDiv = document.getElementById('result');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+
+        fetch('/api/fileanalyse', {
+          method: 'POST',
+          body: formData,
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            resultDiv.innerHTML = `File name: ${data.name}<br>
+                                    File type: ${data.type}<br>
+                                    File size: ${data.size} bytes`;
+          })
+          .catch(function (error) {
+            resultDiv.innerHTML = `Error: ${error.message}`;
+          });
+      });
+    </script>
+  </body>
+</html>
